@@ -100,3 +100,71 @@
 #forecastImage{
     cursor:pointer;
 }
+
+/* Mobile Devices */
+
+@media (max-width: 768px) {
+
+    .hero h1{
+        font-size:1.5rem;
+    }
+
+    .hero p{
+        font-size:0.9rem;
+    }
+
+    .dashboard{
+
+        position:relative;
+
+        left:auto;
+        top:auto;
+
+        transform:none;
+
+        width:95vw;
+        height:75vh;
+
+        margin:auto;
+    }
+
+    .toolbar{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+        gap:8px;
+    }
+
+    .toolbar select,
+    .toolbar input,
+    .toolbar button{
+
+        width:100%;
+    }
+
+    #frameLabel{
+
+        width:100%;
+        text-align:center;
+    }
+
+    .side-panel{
+
+        top:auto;
+
+        bottom:20px;
+
+        left:10px;
+
+        width:180px;
+    }
+
+    .footer{
+        font-size:0.8rem;
+        text-align:center;
+    }
+
+}
+
