@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maldives Wave Forecast</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="imageModal" class="image-modal" onclick="closeImage()">
+<img id="modalImage" class="modal-image">
+</div>
+<header class="hero">
+<h1>🌊 Maldives Experimental Wave Forecast System (MEWFS)</h1>
+<p>Operational wave guidance for selected atolls</p>
+</header>
+<div class="dashboard">
+<div class="toolbar">
+  <select id="atollSelect">
+  <option value="Laamu">Laamu Atoll</option>
+  <option value="Other">Other Atolls in Development</option>
+  </select>
+
+<div class="status">Updated: 06 UTC</div>
+<input type="date" id="forecastDate">
+<button onclick="playAnimation()">▶ Play</button>
+<button onclick="pauseAnimation()">⏸ Pause</button>
+<div id="frameLabel">
+    Forecast Hour: 1
+</div>
+</div>
+<div class="viewer">
+<img id="forecastImage"
+     src=""
+     alt="Forecast"
+     onclick="openImage(this.src)">
+</div>
+<div class="footer">Click image to enlarge • Wave Height (Hs) • Peak Period (Tp)</div>
+</div>
+<div class="ocean">
+<svg class="wave wave3" viewBox="0 0 2880 320" preserveAspectRatio="none"><path fill="#74c0fc" d="M0,220 C120,180 240,180 360,220 S600,260 720,220 S960,180 1080,220 S1320,260 1440,220 S1680,180 1800,220 S2040,260 2160,220 S2400,180 2520,220 S2760,260 2880,220 L2880,320 L0,320 Z"/></svg>
+<svg class="wave wave2" viewBox="0 0 2880 320" preserveAspectRatio="none"><path fill="#4dabf7" d="M0,240 C150,190 300,190 450,240 S750,290 900,240 S1200,190 1350,240 S1650,290 1800,240 S2100,190 2250,240 S2550,290 2700,240 S2850,190 2880,240 L2880,320 L0,320 Z"/></svg>
+<svg class="wave wave1" viewBox="0 0 2880 320" preserveAspectRatio="none"><path fill="#228be6" d="M0,260 C180,210 360,210 540,260 S900,310 1080,260 S1440,210 1620,260 S1980,310 2160,260 S2520,210 2700,260 S2880,310 2880,260 L2880,320 L0,320 Z"/></svg>
+</div>
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <h2>⚠ Disclaimer</h2>
+        <p>This forecast is experimental ! <br></p>
+        <br>
+        <p>NOT to be used for navigation / ANY safety-critical decision making.</p><br>
+        <p>Refer to the <a href="https://www.meteorology.gov.mv/" target="_blank">MMS</a> for the official forecast.</p>
+        <button onclick="closePopup()">
+            Continue to Forecast
+        </button>
+    </div>
+</div>
+<script src="js/app.js"></script>
+</body></html>
