@@ -1,2 +1,2 @@
 # raalhu-web
-website devolopment for model
+website development for model
