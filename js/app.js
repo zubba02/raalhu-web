@@ -136,3 +136,29 @@ function previousFrame() {
     document.getElementById("frameLabel").innerText =
         `Forecast Hour: ${frame}`;
 }
+
+function toggleMenu() {
+
+    const menu = document.getElementById("menuPanel");
+
+    menu.style.display =
+        menu.style.display === "block"
+        ? "none"
+        : "block";
+}
+
+document.addEventListener("click", function(event) {
+
+    const menu =
+        document.getElementById("menuPanel");
+
+    const button =
+        document.getElementById("menuButton");
+
+    if (
+        !menu.contains(event.target) &&
+        !button.contains(event.target)
+    ) {
+        menu.style.display = "none";
+    }
+});
