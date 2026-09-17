@@ -11,27 +11,7 @@
 <img id="modalImage" class="modal-image">
 </div>
 
-<div class="side-panel">
 
-    <h3>🌊 MEWFS</h3>
-
-    <a href="about.html">📖 About</a>
-
-    <a href="model.html">⚙️ Model Information</a>
-
-    <a href="validation.html">📊 Validation</a>
-
-    <a href="funding.html">🤝 Funding</a>
-
-    <a href="disclaimer.html">⚠ Disclaimer</a>
-
-    <a href="https://www.meteorology.gov.mv/"
-       target="_blank"
-       rel="noopener noreferrer">
-        🌐 MMS
-    </a>
-
-</div>
 
 <header class="hero">
     <h1>🌊 Maldives Experimental Wave Forecast System (MEWFS)</h1>
@@ -50,10 +30,43 @@
 <button onclick="playAnimation()">▶ Play</button>
 <button onclick="pauseAnimation()">⏸ Pause</button>
 <button onclick="nextFrame()">⏭ Next</button>
+
 <div id="frameLabel">
     Forecast Hour: 1
 </div>
+
+<div class="menu-container">
+
+  <button id="menuButton" onclick="toggleMenu()">
+      ☰ Project Info
+  </button>
+
+    <div id="menuPanel" class="menu-panel">
+
+        <a href="about.html">📖 About</a>
+
+        <a href="model.html">⚙️ Model Information</a>
+
+        <a href="validation.html">📊 Validation</a>
+
+        <a href="funding.html">🤝 Funding</a>
+
+        <a href="disclaimer.html">⚠ Disclaimer</a>
+
+        <a href="https://www.meteorology.gov.mv/"
+           target="_blank"
+           rel="noopener noreferrer">
+            🌐 MMS
+        </a>
+
+    </div>
+
 </div>
+
+
+</div>
+
+
 <div class="viewer">
 <img id="forecastImage"
      src=""
