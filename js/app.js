@@ -106,3 +106,33 @@ function pauseAnimation() {
 
     timer = null;
 }
+
+function nextFrame() {
+
+    pauseAnimation();
+
+    frame++;
+
+    if(frame > 23)
+        frame = 1;
+
+    image.src = getImagePath();
+
+    document.getElementById("frameLabel").innerText =
+        `Forecast Hour: ${frame}`;
+}
+
+function previousFrame() {
+
+    pauseAnimation();
+
+    frame--;
+
+    if(frame < 1)
+        frame = 23;
+
+    image.src = getImagePath();
+
+    document.getElementById("frameLabel").innerText =
+        `Forecast Hour: ${frame}`;
+}

@@ -10,26 +10,32 @@
 <div id="imageModal" class="image-modal" onclick="closeImage()">
 <img id="modalImage" class="modal-image">
 </div>
-<header class="hero">
-  <div class="side-panel">
+
+<div class="side-panel">
 
     <h3>🌊 MEWFS</h3>
 
-    📖 About</a>
+    <a href="about.html">📖 About</a>
 
-    ⚙️ Model Information</a>
+    <a href="model.html">⚙️ Model Information</a>
 
-    📊 Validation</a>
+    <a href="validation.html">📊 Validation</a>
 
-    🤝 Funding</a>
+    <a href="funding.html">🤝 Funding</a>
 
-    <a href="disclaimer.html">⚠ Disclaimer</ps://www.meteorology.gov.mv/
+    <a href="disclaimer.html">⚠ Disclaimer</a>
+
+    <a href="https://www.meteorology.gov.mv/"
+       target="_blank"
+       rel="noopener noreferrer">
         🌐 MMS
     </a>
 
 </div>
-<h1>🌊 Maldives Experimental Wave Forecast System (MEWFS)</h1>
-<p>Operational wave guidance for selected atolls</p>
+
+<header class="hero">
+    <h1>🌊 Maldives Experimental Wave Forecast System (MEWFS)</h1>
+    <p>Operational wave guidance for selected atolls</p>
 </header>
 <div class="dashboard">
 <div class="toolbar">
@@ -40,8 +46,10 @@
 
 <div class="status">Updated: 06 UTC</div>
 <input type="date" id="forecastDate">
+<button onclick="previousFrame()">⏮ Previous</button>
 <button onclick="playAnimation()">▶ Play</button>
 <button onclick="pauseAnimation()">⏸ Pause</button>
+<button onclick="nextFrame()">⏭ Next</button>
 <div id="frameLabel">
     Forecast Hour: 1
 </div>
@@ -52,7 +60,7 @@
      alt="Forecast"
      onclick="openImage(this.src)">
 </div>
-<div class="footer">Click image to enlarge • Wave Height (Hs) • Peak Period (Tp)</div>
+<div class="footer">Click image to enlarge • Wave Height (Hs) • Peak Period (Tp) <br> - BEST VIEWED ON A WEB BROWSER - </div>
 </div>
 <div class="ocean">
 <svg class="wave wave3" viewBox="0 0 2880 320" preserveAspectRatio="none"><path fill="#74c0fc" d="M0,220 C120,180 240,180 360,220 S600,260 720,220 S960,180 1080,220 S1320,260 1440,220 S1680,180 1800,220 S2040,260 2160,220 S2400,180 2520,220 S2760,260 2880,220 L2880,320 L0,320 Z"/></svg>
@@ -65,7 +73,8 @@
         <p>This forecast is experimental ! <br></p>
         <br>
         <p>NOT to be used for navigation / ANY safety-critical decision making.</p><br>
-        <p>Refer to the <a href="https://www.meteorology.gov.mv/" target="_blank">MMS</a> for the official forecast.</p>
+        <p>Refer to the <a href="https://www.meteorology.gov.mv/" target="_blank">MMS</a> for the official forecast.</p><br>
+        <p>BEST VIEWED ON A WEB BROWSWER</p>
         <button onclick="closePopup()">
             Continue to Forecast
         </button>
