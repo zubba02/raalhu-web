@@ -49,6 +49,15 @@ window.onload = function() {
 
     });
 
+    document.getElementById("atollSelect")
+        .addEventListener("change", () => {
+
+        frame = 1;
+
+        updateFrame();
+
+    });
+
     updateFrame();
 
     playAnimation();
@@ -73,7 +82,7 @@ function getImagePath() {
         String(frame).padStart(3, "0");
 
     const path =
-        `images/${dateString}/${atoll}_${dateString}_f${frameString}_combined.png`;
+        `images/${atoll}/${dateString}/${atoll}_${dateString}_f${frameString}_combined.png`;
 
     console.log(path);
 
