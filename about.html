@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MEWFS Project Information</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Segoe UI,sans-serif;
+    background:radial-gradient(circle at top,#0f4c75,#07243a 60%,#03111d);
+    color:white;
+    line-height:1.7;
+}
+
+.header{
+
+    text-align:center;
+
+    padding:40px 20px;
+}
+
+.header h1{
+    font-size:2.4rem;
+}
+
+.header p{
+    opacity:.8;
+    margin-top:10px;
+}
+
+.content{
+
+    width:min(1200px,95vw);
+
+    margin:auto;
+
+    padding-bottom:60px;
+}
+
+.section{
+
+    background:rgba(255,255,255,.06);
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:20px;
+}
+
+.section h2{
+
+    color:#8fd3ff;
+
+    margin-bottom:15px;
+}
+
+.section h3{
+
+    margin-top:15px;
+    margin-bottom:10px;
+
+    color:#9ed9ff;
+}
+
+.section ul{
+
+    margin-left:25px;
+}
+
+pre{
+
+    background:rgba(0,0,0,.25);
+
+    padding:15px;
+
+    border-radius:12px;
+
+    overflow:auto;
+}
+
+a{
+
+    color:#8fd3ff;
+}
+
+.back{
+
+    position:fixed;
+
+    top:20px;
+    left:20px;
+
+    color:white;
+
+    text-decoration:none;
+
+    background:rgba(255,255,255,.08);
+
+    padding:10px 15px;
+
+    border-radius:10px;
+}
+
+@media (max-width:768px){
+
+    .header h1{
+        font-size:1.7rem;
+    }
+
+    .section{
+        padding:20px;
+    }
+
+    .back{
+        position:relative;
+        display:inline-block;
+        margin:10px;
+        top:auto;
+        left:auto;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<a class="back" href="index.html">
+← Back to Forecast
+</a>
+
+<div class="header">
+
+    <h1>🌊 Maldives Experimental Wave Forecast System (MEWFS)</h1>
+
+    <p>
+        Project Information, Technical Documentation and Disclaimer
+    </p>
+
+</div>
+
+<div class="content">
+
+<div class="section">
+
+<h2>📋 Quick Navigation</h2>
+
+<p>
+
+<a href="#about">📖 About</a> |
+<a href="#model">⚙️ Model Information</a> |
+<a href="#workflow">🔄 Workflow</a> |
+<a href="#limitations">📡 Limitations</a> |
+<a href="#validation">📊 Validation</a> |
+<a href="#funding">🤝 Funding</a> |
+<a href="#disclaimer">⚠ Disclaimer</a> |
+<a href="#mms">🌐 MMS</a>
+
+</p>
+
+</div>
+
+
+
+<!-- ABOUT -->
+
+<div class="section" id="about">
+<h2>📖 About</h2>
+
+<p>
+
+The Maldives Experimental Wave Forecast System (MEWFS) is a research and
+development initiative focused on providing wave forecast guidance for
+Maldivian atolls and reef systems.
+
+</p>
+
+<br>
+
+<p>
+
+The system has been developed to improve understanding of wave conditions
+within the Maldives and to support coastal research, marine planning,
+education and future operational forecast development.
+
+</p>
+
+<br>
+
+<p>
+
+MEWFS combines numerical wave modelling, automated forecast production,
+scientific visualization and web dissemination technologies to provide
+an accessible platform for wave forecast information.
+
+</p>
+
+</div>
+
+<!-- MODEL INFORMATION -->
+
+<div class="section" id="model">
+<h2>⚙️ Model Information</h2>
+
+<p>
+
+The forecasting system is based on the SWAN
+(Simulating WAves Nearshore) spectral wave model. SWAN is a
+third-generation spectral wave model widely used for simulating
+wave transformation in coastal and nearshore environments.
+
+</p>
+
+<br>
+
+<p>
+
+The model solves the spectral action balance equation and simulates
+wave propagation and transformation processes throughout the
+computational domain.
+
+</p>
+
+<br>
+
+<h3>Processes Represented</h3>
+
+<ul>
+
+<li>Wave propagation</li>
+
+<li>Wave shoaling</li>
+
+<li>Wave refraction</li>
+
+<li>Wave diffraction (where applicable)</li>
+
+<li>Bottom friction</li>
+
+<li>Depth-induced wave breaking</li>
+
+<li>Non-linear wave-wave interactions</li>
+
+<li>Wave energy dissipation</li>
+
+</ul>
+
+<br>
+
+<h3>Computational Mesh</h3>
+
+<p>
+
+The Maldives contains highly complex reef-fringed coastlines,
+narrow channels, lagoons and shallow reef platforms. To accurately
+represent these environments, MEWFS utilizes unstructured
+triangular computational meshes.
+
+</p>
+
+<br>
+
+<p>
+
+Computational meshes are generated using the pyTri framework,
+a Python-based mesh generation system developed to create
+bathymetry-dependent triangular meshes for coastal and marine
+modelling applications.
+
+</p>
+
+<br>
+
+<p>
+
+The mesh generation procedure automatically varies mesh density
+according to bathymetry and geographical complexity, providing
+greater detail around reefs, coastlines and areas of interest
+while maintaining computational efficiency offshore.
+
+</p>
+
+<br>
+
+<h3>Bathymetry</h3>
+
+<p>
+
+The bathymetric dataset used for model setup and mesh generation
+is based on the high-resolution Maldives bathymetric compilation
+described by Rasheed et al. (2020).
+
+</p>
+
+<br>
+
+<p>
+
+<a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2020EA001207"
+target="_blank">
+
+Rasheed et al. (2020) – High Resolution Bathymetry for the Maldives
+
+</a>
+
+</p>
+
+<br>
+
+<h3>Forecast Variables</h3>
+
+<ul>
+
+<li>Significant Wave Height (Hs)</li>
+
+<li>Peak Wave Period (Tp)</li>
+
+<li>Wave Direction</li>
+
+<li>Spectral Wave Parameters</li>
+
+</ul>
+
+</div>
+
+<!-- FORECAST WORKFLOW -->
+
+<div class="section" id="workflow">
+<h2>🔄 Forecast Workflow</h2>
+
+<h3>1. Domain Definition</h3>
+
+<p>
+
+Computational domains are defined for selected Maldivian atolls.
+Bathymetric information and coastline geometry are combined to
+prepare the model domain.
+
+</p>
+
+<h3>2. Mesh Generation</h3>
+
+<p>
+
+pyTri is used to generate an unstructured triangular computational
+mesh. Mesh density varies according to local bathymetry and
+coastal complexity.
+
+</p>
+
+<h3>3. Boundary Forcing</h3>
+
+<p>
+
+Wave boundary conditions are obtained from larger-scale wave forecast
+guidance products and supplied along the open boundaries of the
+domain.
+
+</p>
+
+<h3>4. Forecast Simulation</h3>
+
+<p>
+
+The SWAN wave model performs the forecast simulation using the
+prepared forcing conditions and computational mesh.
+
+</p>
+
+<h3>5. Automation</h3>
+
+<p>
+
+Forecast preparation, execution, monitoring, post-processing and
+publication are managed using the Raalhu modelling workflow.
+
+</p>
+
+<h3>6. Visualization</h3>
+
+<p>
+
+Model outputs are converted to VTK formats and visualized using
+PyVista.
+
+</p>
+
+<h3>7. Forecast Product Generation</h3>
+
+<pre>
+Laamu_YYYYMMDD_f001_combined.png
+Laamu_YYYYMMDD_f002_combined.png
+...
+Laamu_YYYYMMDD_f023_combined.png
+</pre>
+
+<h3>8. Publication</h3>
+
+<p>
+
+Forecast products are automatically uploaded and published through
+the MEWFS web portal hosted on GitHub Pages.
+
+</p>
+
+<pre>
+images/
+├── Laamu/
+│   └── YYYYMMDD/
+├── Kaafu/
+│   └── YYYYMMDD/
+├── Baa/
+│   └── YYYYMMDD/
+└── ...
+</pre>
+
+</div>
+
+<!-- LIMITATIONS -->
+
+<div class="section" id="limitations">
+<h2>📡 Data Sources and Current Limitations</h2>
+
+<h3>Computational Infrastructure</h3>
+
+<p>
+
+The current implementation of MEWFS operates using two
+Acer Veriton E10 ETBox mini-computers.
+
+</p>
+
+<br>
+
+<p>
+
+While these systems provide sufficient capability for the generation
+of experimental forecast products, they do not provide the computing
+resources available to dedicated operational forecasting systems or
+high-performance computing environments.
+
+</p>
+
+<br>
+
+<p>
+
+Consequently, forecast products are generated using simplified model
+configurations and reduced computational complexity compared with what
+would be achievable using larger computational infrastructure.
+
+</p>
+
+<br>
+
+<h3>Current Limitations</h3>
+
+<ul>
+
+<li>
+MEWFS remains under active development.
+</li>
+
+<li>
+Forecast products are generated using limited computational resources.
+</li>
+
+<li>
+Model resolutions are currently constrained by available hardware.
+</li>
+
+<li>
+Not all local-scale lagoon, reef and shoreline processes may be fully resolved.
+</li>
+
+<li>
+Forecast coverage remains limited to selected atolls.
+</li>
+
+<li>
+Model configurations have been simplified to maintain practical run times.
+</li>
+
+<li>
+Forecast products should be interpreted as experimental guidance products.
+</li>
+
+</ul>
+
+</div>
+
+<!-- VALIDATION -->
+
+<div class="section" id="validation">
+<h2>📊 Validation</h2>
+
+<p>
+
+The Maldives Experimental Wave Forecast System is currently in its
+research and development phase.
+
+</p>
+
+<br>
+
+<p>
+
+A formal operational verification and validation framework has not
+yet been established.
+
+</p>
+
+<br>
+
+<p>
+
+Forecast products have not yet undergone comprehensive evaluation
+against wave buoy measurements, operational monitoring systems,
+or long-term hindcast validation datasets.
+
+</p>
+
+<br>
+
+<p>
+
+Current assessment is based primarily on internal testing,
+visual inspection and qualitative evaluation of forecast behaviour.
+
+</p>
+
+<br>
+
+<p>
+
+Future development activities are expected to include:
+
+</p>
+
+<ul>
+
+<li>Wave buoy validation.</li>
+
+<li>Satellite comparison studies.</li>
+
+<li>Forecast skill assessment.</li>
+
+<li>Error and uncertainty statistics.</li>
+
+<li>Operational verification procedures.</li>
+
+<li>Long-term hindcast evaluation.</li>
+
+</ul>
+
+<br>
+
+<p>
+
+Until a comprehensive validation programme is completed, all forecast
+products should be regarded as experimental research products.
+
+</p>
+
+</div>
+
+<!-- FUNDING -->
+
+<div class="section" id="funding">
+<h2>🤝 Funding</h2>
+
+<p>
+
+The Maldives Experimental Wave Forecast System (MEWFS) was developed
+through a Small Grant Research Project funded by
+<strong>Maldives University</strong>.
+
+</p>
+
+<br>
+
+<p>
+
+Funding support contributed towards the development of numerical
+modelling workflows, unstructured mesh generation methodologies,
+forecast automation systems, scientific visualization tools and
+public dissemination of forecast products through the MEWFS web
+platform.
+
+</p>
+
+</div>
+
+<!-- DISCLAIMER -->
+
+<div class="section" id="disclaimer">
+<h2>⚠ Disclaimer</h2>
+<p>
+
+MEWFS is an experimental research product.
+
+</p>
+
+<br>
+
+<p>
+
+Forecast information is provided for educational, research and
+situational-awareness purposes only.
+
+</p>
+
+<br>
+
+<p>
+
+The system has not yet undergone comprehensive operational validation
+and forecast products may contain uncertainty and modelling errors.
+
+</p>
+
+<br>
+
+<p>
+
+Forecast products MUST NOT be used for navigation, emergency response,
+voyage planning or any safety-critical decision making.
+
+</p>
+
+<br>
+
+<p>
+
+Users should consult official marine forecasts issued by the Maldives
+Meteorological Service for operational guidance.
+
+</p>
+
+</div>
+
+<!-- MMS -->
+
+<div class="section" id="mms">
+<h2>🌐 Official Forecasts</h2>
+
+<p>
+
+For official marine forecasts, weather forecasts and warnings,
+please consult the Maldives Meteorological Service (MMS).
+
+</p>
+
+<br>
+
+<p>
+
+<a href="https://www.meteorology.gov.mv/"
+target="_blank">
+
+Visit Maldives Meteorological Service
+
+</a>
+
+</p>
+
+</div>
+
+</div>
+
+</body>
+</html>
