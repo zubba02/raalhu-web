@@ -1,0 +1,31 @@
+{
+  "_help": "Edit freely. 'places' are labels drawn on the map. 'spots' are forecast points: the daily export snaps each one to the nearest model water cell and stores its 24-hour series, so they show up in the Places tab. Coordinates are decimal degrees (WGS84).",
+  "places": [
+    {"name": "Isdhoo", "lat": 2.1430, "lon": 73.5780},
+    {"name": "Kalaidhoo", "lat": 2.1300, "lon": 73.5570},
+    {"name": "Dhanbidhoo", "lat": 2.1120, "lon": 73.5460},
+    {"name": "Maabaidhoo", "lat": 2.0420, "lon": 73.5330},
+    {"name": "Mundoo", "lat": 2.0000, "lon": 73.5370},
+    {"name": "Gan", "lat": 1.9280, "lon": 73.5430},
+    {"name": "Maandhoo", "lat": 1.8830, "lon": 73.5280},
+    {"name": "Kadhdhoo", "lat": 1.8660, "lon": 73.5220},
+    {"name": "Fonadhoo", "lat": 1.8380, "lon": 73.5000},
+    {"name": "Gaadhoo", "lat": 1.8270, "lon": 73.4520},
+    {"name": "Maamendhoo", "lat": 1.8240, "lon": 73.3880},
+    {"name": "Hithadhoo", "lat": 1.8000, "lon": 73.3880},
+    {"name": "Kunahandhoo", "lat": 1.7870, "lon": 73.3680},
+    {"name": "Maavah", "lat": 1.8930, "lon": 73.2430}
+  ],
+  "spots": [
+    {"name": "Isdhoo, ocean side", "lat": 2.1500, "lon": 73.5970},
+    {"name": "Maabaidhoo, ocean side", "lat": 2.0420, "lon": 73.5480},
+    {"name": "Gan, ocean side", "lat": 1.9250, "lon": 73.5620},
+    {"name": "Fonadhoo, ocean side", "lat": 1.8300, "lon": 73.5120},
+    {"name": "Gaadhoo channel", "lat": 1.8150, "lon": 73.4650},
+    {"name": "Hithadhoo, ocean side", "lat": 1.7850, "lon": 73.3950},
+    {"name": "Kunahandhoo, ocean side", "lat": 1.7740, "lon": 73.3680},
+    {"name": "Maavah, ocean side", "lat": 1.8900, "lon": 73.2280},
+    {"name": "Maamendhoo, lagoon", "lat": 1.8320, "lon": 73.3900},
+    {"name": "Lagoon centre", "lat": 1.9300, "lon": 73.4000}
+  ]
+}

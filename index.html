@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Raalhu wave forecast</title>
+<meta name="description" content="Interactive daily wave forecast for Laamu Atoll, Maldives, from the Maldives Experimental Wave Forecast System (MEWFS). Tap the map to read wave height, period and direction at any point.">
+<meta property="og:title" content="Raalhu: Maldives experimental wave forecast">
+<meta property="og:description" content="Hourly wave height, period and direction for Laamu Atoll. Tap the map to read the forecast at any point.">
+<meta name="theme-color" content="#0d2b3e">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app" id="app">
+
+  <header class="bar">
+    <a class="brand" href="./" aria-label="Raalhu wave forecast, home">
+      <svg viewBox="0 0 34 24" width="34" height="24" aria-hidden="true"><path d="M1 8c4-5 7-5 11 0s7 5 11 0 7-5 10-1" /><path d="M1 15c4-5 7-5 11 0s7 5 11 0 7-5 10-1" opacity=".55"/><path d="M1 22c4-5 7-5 11 0s7 5 11 0 7-5 10-1" opacity=".25"/></svg>
+      <span class="brand-name">Raalhu</span>
+      <span class="brand-sub">Maldives experimental wave forecast</span>
+    </a>
+    <div class="bar-pick">
+      <label class="sel"><span class="vh">Atoll</span><select id="atollSel"></select></label>
+      <div class="datepick">
+        <button class="ib" id="prevDay" aria-label="Earlier forecast day"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg></button>
+        <label class="sel"><span class="vh">Forecast day</span><select id="dateSel"></select></label>
+        <button class="ib" id="nextDay" aria-label="Later forecast day"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></svg></button>
+      </div>
+      <p class="run" id="runInfo"></p>
+    </div>
+    <div class="bar-end">
+      <div class="seg" role="group" aria-label="Units">
+        <button data-units="m" aria-pressed="true">m</button><button data-units="ft" aria-pressed="false">ft</button>
+      </div>
+      <button class="ib" id="themeBtn" aria-label="Switch between light and dark"><svg viewBox="0 0 16 16"><path d="M8 1.5a6.5 6.5 0 1 0 6.5 6.5A5 5 0 0 1 8 1.5Z"/></svg></button>
+      <button class="tag" id="discBtn">Experimental</button>
+      <a class="link" href="about.html">About</a>
+    </div>
+  </header>
+
+  <main class="stage">
+    <section class="mapwrap" id="map" aria-label="Forecast map">
+      <canvas class="base"></canvas><canvas class="gl"></canvas><canvas class="fx"></canvas><canvas class="ov" tabindex="0" aria-label="Wave forecast map. Drag to move, scroll or pinch to zoom, tap to read the forecast at a point."></canvas>
+
+      <nav class="layers" id="layers" aria-label="Map layer"></nav>
+
+      <div class="tools">
+        <button class="ib" id="zoomIn" aria-label="Zoom in"><svg viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></svg></button>
+        <button class="ib" id="zoomOut" aria-label="Zoom out"><svg viewBox="0 0 16 16"><path d="M3 8h10"/></svg></button>
+        <button class="ib" id="zoomFit" aria-label="Show the whole atoll"><svg viewBox="0 0 16 16"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg></button>
+        <button class="ib" id="optBtn" aria-label="Map options" aria-expanded="false"><svg viewBox="0 0 16 16"><path d="M2 4h7M12 4h2M2 8h2M7 8h7M2 12h8M13 12h1"/><circle cx="10.5" cy="4" r="1.5"/><circle cx="5.5" cy="8" r="1.5"/><circle cx="11.5" cy="12" r="1.5"/></svg></button>
+        <div class="pop" id="optPop" hidden>
+          <fieldset><legend>Arrows show</legend>
+            <label><input type="radio" name="arrows" value="wind" checked> Wind</label>
+            <label><input type="radio" name="arrows" value="waves"> Wave direction</label>
+          </fieldset>
+          <fieldset><legend>Draw them as</legend>
+            <label><input type="radio" name="motion" value="streaks" checked> Moving streaks</label>
+            <label><input type="radio" name="motion" value="arrows"> Arrows</label>
+            <label><input type="radio" name="motion" value="off"> Nothing</label>
+          </fieldset>
+          <label><input type="checkbox" id="optContours" checked> Depth contours (2, 5, 10 m)</label>
+          <label><input type="checkbox" id="optLabels" checked> Island names</label>
+          <fieldset><legend>Background map</legend>
+            <label><input type="radio" name="basemap" value="satellite" checked> Satellite</label>
+            <label><input type="radio" name="basemap" value="street"> Street map</label>
+            <label><input type="radio" name="basemap" value="none"> None</label>
+          </fieldset>
+          <label class="rng">Wave layer strength <input type="range" id="optAlpha" min="35" max="100" step="5" value="80"></label>
+          <button class="btn" id="saveImg">Save map as picture</button>
+        </div>
+      </div>
+
+      <div class="legend" id="legend"></div>
+      <div class="attr" id="attr"></div>
+      <div class="tip" id="tip" hidden></div>
+      <div class="mapmsg" id="mapMsg" hidden></div>
+    </section>
+
+    <aside class="panel" id="panel" data-sheet="peek" aria-label="Forecast details">
+      <button class="grip" id="grip" aria-label="Show or hide details"><i></i></button>
+      <div class="tabs" role="tablist">
+        <button role="tab" data-tab="point" aria-selected="true">This point</button>
+        <button role="tab" data-tab="places" aria-selected="false">Places</button>
+        <button role="tab" data-tab="offshore" aria-selected="false">Wind and swell</button>
+      </div>
+      <div class="pane" id="pane"></div>
+    </aside>
+  </main>
+
+  <footer class="time">
+    <div class="tctl">
+      <button class="ib" id="stepBack" aria-label="One hour earlier"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg></button>
+      <button class="play" id="playBtn" aria-label="Play the forecast"><svg viewBox="0 0 16 16"><path class="i-play" d="M4.5 2.5v11l9-5.5z"/><path class="i-pause" d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg></button>
+      <button class="ib" id="stepFwd" aria-label="One hour later"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></svg></button>
+    </div>
+    <div class="tnow"><strong id="tClock">--:--</strong><span id="tDay"></span></div>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Forecast time" aria-valuemin="0" aria-valuemax="23" aria-valuenow="0">
+      <svg class="spark" id="spark" preserveAspectRatio="none"></svg>
+      <div class="ticks" id="ticks"></div>
+      <div class="nowmark" id="nowMark" hidden><span>now</span></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="btn ghost" id="nowBtn" hidden>Jump to now</button>
+  </footer>
+</div>
+
+<dialog class="modal" id="disc">
+  <h2>This forecast is experimental</h2>
+  <p>Raalhu shows output from a research wave model that has not yet been checked against measurements. It can be wrong.</p>
+  <p><strong>Do not use it for navigation, voyage planning or any decision where safety matters.</strong></p>
+  <p>For official marine forecasts and warnings, use the <a href="https://www.meteorology.gov.mv/" target="_blank" rel="noopener">Maldives Meteorological Service</a>.</p>
+  <form method="dialog"><button class="btn primary" autofocus>Show the forecast</button></form>
+</dialog>
+
+<noscript><p style="padding:2rem">This forecast map needs JavaScript.</p></noscript>
+<script src="js/raalhu.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About Raalhu and MEWFS</title>
+<meta name="description" content="How the Maldives Experimental Wave Forecast System (MEWFS) works, what it shows, and its limits.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="doc">
+<header class="bar">
+  <a class="brand" href="./" aria-label="Raalhu wave forecast, home">
+    <svg viewBox="0 0 34 24" width="34" height="24" aria-hidden="true"><path d="M1 8c4-5 7-5 11 0s7 5 11 0 7-5 10-1" /><path d="M1 15c4-5 7-5 11 0s7 5 11 0 7-5 10-1" opacity=".55"/><path d="M1 22c4-5 7-5 11 0s7 5 11 0 7-5 10-1" opacity=".25"/></svg>
+    <span class="brand-name">Raalhu</span>
+  </a>
+  <div class="bar-pick"></div>
+  <div class="bar-end"><a class="btn" href="./">Open the forecast map</a></div>
+</header>
+
+<main class="doc-wrap">
+  <h1>A wave forecast built for Maldivian reefs</h1>
+  <p class="lede">Raalhu is the public face of the Maldives Experimental Wave Forecast System (MEWFS), a research project that runs a nearshore wave model for Maldivian atolls every day and publishes the result as a map you can explore.</p>
+  <nav class="toc" aria-label="On this page">
+    <a href="#read">Reading the map</a><a href="#model">The model</a><a href="#workflow">Daily workflow</a>
+    <a href="#limitations">Limitations</a><a href="#validation">Validation</a><a href="#funding">Funding</a><a href="#disclaimer">Disclaimer</a>
+  </nav>
+
+  <div class="callout" id="disclaimer">
+    <p><strong>MEWFS is an experimental research product.</strong> It has not yet been validated against measurements and may contain errors. Forecasts are provided for education, research and general awareness only.</p>
+    <p>Do not use them for navigation, emergency response, voyage planning or any safety-critical decision. For official marine forecasts and warnings, consult the <a href="https://www.meteorology.gov.mv/" target="_blank" rel="noopener">Maldives Meteorological Service</a>.</p>
+  </div>
+
+  <h2 id="read">Reading the map</h2>
+  <p>Tap or click anywhere on the water to read the forecast at that point. The panel shows the conditions at the selected time and how they change through the forecast day. Drag the timeline, or press play, to move through the hours. All times are Maldives time (UTC+5).</p>
+  <dl class="vars">
+    <dt>Wave height</dt><dd>Significant wave height (Hs): the average height of the highest third of waves. Individual waves vary, and the occasional wave can be nearly twice as high.</dd>
+    <dt>Mean period</dt><dd>The average time between wave crests (Tm01). Short periods are local wind chop. Long periods mean ocean swell, which carries far more energy than chop of the same height.</dd>
+    <dt>Depth contours</dt><dd>The thin dark lines mark the shoreline (0 m) and water depths of 2, 5 and 10 m from the model bathymetry.</dd>
+    <dt>Wave direction</dt><dd>The direction the most energetic waves come from. Streaks and arrows on the map point the way the waves travel.</dd>
+    <dt>Wave power</dt><dd>Energy carried per metre of wave crest, estimated from height and mean period with the deep-water formula. A guide to how hard waves hit a reef or shore.</dd>
+    <dt>Spread</dt><dd>How widely wave directions fan out. Low values mean clean, lined-up swell. High values mean a confused sea.</dd>
+    <dt>Wind and swell</dt><dd>The wind and open-ocean swell taken from the global forecast and fed into the model at its edges.</dd>
+  </dl>
+
+  <h2 id="model">The model</h2>
+  <p>The forecast is based on SWAN (Simulating WAves Nearshore), a third-generation spectral wave model widely used for coastal and nearshore environments. It solves the spectral action balance equation and simulates how waves travel and change across the model area.</p>
+  <h3>Processes represented</h3>
+  <ul>
+    <li>Wave propagation, shoaling and refraction</li>
+    <li>Wave growth by wind, and whitecapping</li>
+    <li>Depth-induced breaking</li>
+    <li>Non-linear wave-wave interactions</li>
+  </ul>
+  <h3>Computational mesh</h3>
+  <p>The Maldives has reef-fringed coastlines, narrow channels, lagoons and shallow reef platforms. To represent them, MEWFS uses unstructured triangular meshes generated with pyTri, a Python mesh generator developed for coastal modelling. Mesh density follows the bathymetry: fine around reefs, coastlines and areas of interest, coarser offshore.</p>
+  <h3>Bathymetry</h3>
+  <p>Depths come from the high-resolution Maldives bathymetric compilation described by <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2020EA001207" target="_blank" rel="noopener">Rasheed et al. (2020)</a>.</p>
+  <h3>Forcing</h3>
+  <p>Open-ocean swell at the model edges and the wind over the atoll are taken from the NOAA GFS-Wave global forecast (00 UTC run).</p>
+
+  <h2 id="workflow">Daily workflow</h2>
+  <ol>
+    <li>The latest global wave forecast is downloaded.</li>
+    <li>Swell height, period and direction are extracted along each open edge of the atoll domain, with the wind over the atoll.</li>
+    <li>SWAN runs once for each forecast hour on the atoll mesh.</li>
+    <li>The results are resampled onto a regular grid and packed into small image files, one per hour.</li>
+    <li>The files are uploaded to this site, hosted on GitHub Pages. Your browser decodes them to draw the map and read values at any point.</li>
+  </ol>
+  <p>Preparation, model runs, post-processing and publication are automated by the Raalhu modelling workflow.</p>
+
+  <h2 id="limitations">Limitations</h2>
+  <p>MEWFS currently runs on two Acer Veriton mini-computers. They are enough to produce experimental forecasts, but far from the computing power of an operational forecasting centre, so the model configuration is simplified to keep run times practical.</p>
+  <ul>
+    <li>The system is under active development.</li>
+    <li>Each hour is computed as a separate steady-state run.</li>
+    <li>Model resolution is limited by the available hardware, so not every lagoon, reef and shoreline process is resolved.</li>
+    <li>Tides and currents are not included.</li>
+    <li>Coverage is limited to selected atolls.</li>
+  </ul>
+
+  <h2 id="validation">Validation</h2>
+  <p>MEWFS is in its research and development phase. No formal verification framework is in place yet, and the forecasts have not been systematically compared with wave buoys, satellite data or long-term hindcasts. Assessment so far rests on internal testing and visual inspection.</p>
+  <p>Planned work includes wave buoy validation, satellite comparison, forecast skill assessment, error statistics and long-term hindcast evaluation. Until that is done, treat every product on this site as experimental.</p>
+
+  <h2 id="funding">Funding</h2>
+  <p>MEWFS was developed through a Small Grant Research Project funded by <strong>Maldives University</strong>. The grant supported the modelling workflow, mesh generation methods, forecast automation, visualisation tools and public release of the forecasts through this site.</p>
+</main>
+</body>
+</html>
